@@ -1,5 +1,5 @@
 angular
-    .module('movieCore', ['ngResource'])
+    .module('MovieCore', ['ngResource'])
     .factory('PopularMovies', function($resource){
 
         return $resource('popular/:movieId', { movieId: '@id' }, {
