@@ -45,16 +45,43 @@ describe('omdb service', function(){
     it('should return movie data by id', function(){
         var response; 
         var expectedUrl = 'http://www.omdbapi.com/?v=1&i=tt0251413';
+
+        // other possibilities.
+
+        // var expectedUrl = function(url){
+        //     return url.indexOf('http://www.omdbapi.com') !== -1; 
+        // };        
+        //var expectedUrl = /http:\/\/www.omdbapi.com\/\?v=1&i=tt0251413/;  
         
-        $httpBackend.when('GET', expectedUrl).respond(200, movieDataById);
+        $httpBackend.expect('GET', expectedUrl)
+                    .respond(200, movieDataById);
 
         omdbApi.find('tt0251413').then(function(data){   
-                response = data; 
-            });
+            response = data; 
+        });
 
         $httpBackend.flush();
 
         expect(response).toEqual(movieDataById);
+    });
+
+    it('should handle error', function(){
+        var response;
+
+        $httpBackend.expect('GET', 'http://www.omdbapi.com/?v=1&i=tt0251413')
+                    .respond(500);
+
+        omdbApi.find('tt0251413')
+            .then(function(data){
+                response = data;
+            })
+            .catch(function(error){
+                console.log(dump(error));
+                response = 'error';
+            });
+
+        $httpBackend.flush();
+        expect(response).toEqual('error');
     }); 
     
 }); 
