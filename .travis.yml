@@ -7,7 +7,7 @@ branches:
     only: 
         - develop
 
-before_script: 
+before_script:
     - npm install
 
 before_install:
@@ -16,7 +16,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sleep 3
 
-script: 
-    - npm test
+script: karma start karma.conf.js --single-run
+ 
 
 
