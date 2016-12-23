@@ -70,4 +70,48 @@ describe('MovieCore', function(){
         expect($httpBackend.flush).not.toThrow();
     }); 
 
+    it('should authenticate requests', function(){
+        
+        /* specifying  a function that returns true or false, whether the header contains a valid property*/        
+        var expectedHeaders = function(headers){            
+            //console.log(angular.mock.dump(headers)); //              
+            return angular.fromJson(headers).authToken === 'supersecrettoken';
+        };
+
+        /* specifying exact json object to be match against actual data sent*/
+        // var expectedHeaders = {
+        //   "authToken": "supersecrettoken",
+        //   "Accept": "application/json, text/plain, */*"
+        // };
+
+        var matchAny = /.*/; 
+
+        /* backend fake handle implementation for each fake request*/
+
+        $httpBackend.whenGET(matchAny, expectedHeaders)
+            .respond(200);
+
+        $httpBackend.expectPOST(matchAny, matchAny, expectedHeaders)
+            .respond(200);
+        
+        $httpBackend.expectPUT(matchAny, matchAny, expectedHeaders)
+            .respond(200);
+
+        $httpBackend.expectDELETE(matchAny, expectedHeaders)
+            .respond(200);        
+        
+        /* code under test */
+        var item = { id: '0123456789', description: 'This movie is great.' }; 
+        
+        /* Five fake requests sent to backend*/
+        PopularMovies.query(); 
+        PopularMovies.get({ id: '0123456789' });
+        new PopularMovies(item).$save();
+        new PopularMovies(item).$update();
+        new PopularMovies(item).$remove(); 
+              
+        expect($httpBackend.flush).not.toThrow(); 
+
+    }); 
+
 }); 
