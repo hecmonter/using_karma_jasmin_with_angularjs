@@ -1,9 +1,9 @@
-describe('MovieCore', function(){
+describe('movieCore Test', function(){
 
     var PopularMovies; 
     var $httpBackend; 
 
-    beforeEach(module('MovieCore')); 
+    beforeEach(module('movieCore')); 
 
     beforeEach(inject(function(_PopularMovies_, _$httpBackend_){
         PopularMovies = _PopularMovies_; 

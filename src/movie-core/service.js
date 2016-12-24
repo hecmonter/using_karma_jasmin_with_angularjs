@@ -1,5 +1,5 @@
 angular
-    .module('MovieCore', ['ngResource'])
+    .module('movieCore', ['ngResource'])
     .factory('PopularMovies', function($resource){
         var token = 'supersecrettoken'; 
         

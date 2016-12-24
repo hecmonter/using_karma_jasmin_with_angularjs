@@ -3,7 +3,7 @@ describe('Search Controller', function () {
     var $location;
     var $controller;
 
-    beforeEach(module('MovieApp'));
+    beforeEach(module('movieApp'));
 
     beforeEach(inject(function (_$controller_, _$location_) {
         $location = _$location_;
