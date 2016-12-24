@@ -19,11 +19,12 @@ describe('Results Controller', function(){
         $scope = {};         
     }));
 
-    // it('should load search results', function(){
-    //     $controller('ResultsController', { $scope: $scope }); 
-    //     expect($scope.results.data.search[0].Title).toBe(results.search[0].Title); 
-    //     expect($scope.results.data.search[1].Title).toBe(results.search[1].Title); 
-    //     expect($scope.results.data.search[2].Title).toBe(results.search[2].Title); 
-    // }); 
+    it('should load search results', function(){
+        $controller('ResultsController', { $scope: $scope });
+        console.log($scope);       
+        expect($scope.results[0].data.Title).toBe(results.search[0].Title); 
+        expect($scope.results[1].data.Title).toBe(results.search[1].Title); 
+        expect($scope.results[2].data.Title).toBe(results.search[2].Title); 
+    }); 
 
 }); 

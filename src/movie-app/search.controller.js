@@ -1,5 +1,5 @@
 angular
-    .module('movieApp', [])
+    .module('movieApp')
     .controller('SearchController', function ($location) {
         this.search = function () {
             if (this.query) {
