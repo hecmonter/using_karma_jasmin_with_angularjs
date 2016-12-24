@@ -11,20 +11,59 @@ describe('Results Controller', function(){
 
     var $controller; 
     var $scope; 
+    var $q; 
+    var omdbApi; 
+    var $rootScope; 
+    var $location; 
 
+    beforeEach(module('omdb')); 
     beforeEach(module('movieApp')); 
 
-    beforeEach(inject(function(_$controller_){
+    beforeEach(inject(function(_$controller_, _$q_, _$location_, _$rootScope_, _omdbApi_){
         $controller = _$controller_;
-        $scope = {};         
+        $scope = {};
+        $q = _$q_; 
+        $rootScope = _$rootScope_; 
+        omdbApi = _omdbApi_; 
+        $location = _$location_;         
     }));
 
     it('should load search results', function(){
-        $controller('ResultsController', { $scope: $scope });
-        console.log($scope);       
-        expect($scope.results[0].data.Title).toBe(results.search[0].Title); 
-        expect($scope.results[1].data.Title).toBe(results.search[1].Title); 
-        expect($scope.results[2].data.Title).toBe(results.search[2].Title); 
+        /*mock the seach method on omdbApi and resolve with results object as response*/        
+        spyOn(omdbApi, 'search').and.callFake(function(){            
+            var deferred = $q.defer();
+            deferred.resolve(results); 
+            return deferred.promise; 
+        });
+        
+        /* set the querystring part of the url to ?q=star%20wars */        
+        $location.search('q', 'star wars');
+        
+        /* get an instance of the controller and set the correct locals*/
+        $controller('ResultsController', { $scope: $scope });        
+        
+        /* force angular internals to apply digest cycle, so that pending promises could be revolved*/
+        $rootScope.$apply(); // used to resolve the promise above; 
+
+        /* expectations */
+        expect($scope.results[0].Title).toBe(results.search[0].Title); 
+        expect($scope.results[1].Title).toBe(results.search[1].Title); 
+        expect($scope.results[2].Title).toBe(results.search[2].Title); 
+        
+        /* special matcher for spies */
+        expect(omdbApi.search).toHaveBeenCalledWith('star wars');
+    }); 
+    
+    it('should set result status to error', function(){        
+        spyOn(omdbApi, 'search').and.callFake(function(){            
+            var deferred = $q.defer();
+            deferred.reject(); 
+            return deferred.promise; 
+        });
+        $location.search('q', 'star wars');
+        $controller('ResultsController', { $scope: $scope });        
+        $rootScope.$apply(); // used to resolve the promise above;         
+        expect($scope.errorMessage).toBe('An error occurred');
     }); 
 
 }); 
