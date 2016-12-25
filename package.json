@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hecmonter/using_karma_jasmin_with_angularjs#readme",
   "devDependencies": {
+    "express": "^4.14.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
