@@ -4,8 +4,7 @@
         <title>IMDB Movies Example Application</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">        
-        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">                
 
         <style> 
             .container {
@@ -20,6 +19,17 @@
                     <h1><a href="#/">IMDB EXAMPLE APP</a></h1>
                     <p>Get information about movies using IMDB API</p>
                 </div>
+                <div ng-controller="SearchController as $ctrl">
+                    <form class="form-inline-lg" ng-submit="$ctrl.search()">
+                        <div class="input-group">
+                            <input type="text" ng-model="$ctrl.query" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="$ctrl.search()">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </header>
         <div class="container">
@@ -31,7 +41,11 @@
             <div class="footer">&copy;Hector Montero 2016</div>
         </footer>      
 
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.min.js"></script>    
+        <script src="movie-app/app.js"></script>    
+        <script src="movie-app/search.controller.js"></script>    
+        <script src="movie-app/results.controller.js"></script>    
+
     </body>
 </html>

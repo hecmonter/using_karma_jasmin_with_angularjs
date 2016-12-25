@@ -1,1 +1,1 @@
-angular.module('movieApp', ['ui-bootstrap']);
+angular.module('movieApp', ['ui.bootstrap']);
