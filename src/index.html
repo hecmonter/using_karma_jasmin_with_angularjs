@@ -33,17 +33,21 @@
             </div>
         </header>
         <div class="container">
-            <div></div>
+            <div ng-view=""></div>
         </div>
 
         <hr>
-        <footer class="container">
-            <div class="footer">&copy;Hector Montero 2016</div>
-        </footer>      
+        <div class="footer">
+            <div class="container">
+                <p>MIT Licence. Hector Montero 2016</p>
+            </div>
+        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular-route.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.min.js"></script>    
         <script src="movie-app/app.js"></script>    
+        <script src="omdb/service.js"></script>    
         <script src="movie-app/search.controller.js"></script>    
         <script src="movie-app/results.controller.js"></script>    
 
