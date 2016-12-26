@@ -1,0 +1,16 @@
+<div>
+    <br>
+    <ol class="breadcrumb">
+        <li><a href="#/">Home</a></li>
+        <li>Results</li>
+    </ol> 
+
+    <accordion>
+        <accordion-group ng-repeat="r in results" is-open="r.open">
+            <according-heading>
+                {{r.Title}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down':r.open, 'glyphicon-chevron-up': !r.open}"></i>
+            </according-heading>
+        </accordion-group>
+    </accordion>      
+    
+</div>
